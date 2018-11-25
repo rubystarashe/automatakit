@@ -4,7 +4,7 @@
   "description": "SNS bot kit by Quop",
   "author": "Quop",
   "private": true,
-  "productName": "ElectronNuxt",
+  "productName": "AutomataKit",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=DEV electron .",
