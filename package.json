@@ -1,0 +1,32 @@
+{
+  "name": "automatakit",
+  "version": "1.0.0",
+  "description": "SNS bot kit by Quop",
+  "author": "Quop",
+  "private": true,
+  "productName": "ElectronNuxt",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=DEV electron .",
+    "start": "electron .",
+    "electron-rebuild": "./node_modules/.bin/electron-rebuild",
+    "build": "nuxt build",
+    "pack": "npm run build && electron-packager ./ --overwrite",
+    "windows-installer": "node build"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.2.0"
+  },
+  "devDependencies": {
+    "electron": "^3.0.10",
+    "electron-packager": "^12.2.0",
+    "electron-rebuild": "^1.8.2",
+    "electron-winstaller": "^2.7.0",
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^7.1.0",
+    "vue-devtools": "^5.0.0-beta.1"
+  }
+}
