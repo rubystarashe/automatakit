@@ -1,3 +1,5 @@
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+
 const http = require('http')
 const { Nuxt, Builder } = require('nuxt')
 let config = require('./nuxt.config.js')
@@ -9,8 +11,9 @@ if (config.dev) {
 	new Builder(nuxt).build()
 }
 
-server.listen()
-const _NUXT_URL_ = `http://localhost:${server.address().port}`
+const { port } = require('./config.js')
+server.listen(port.main)
+const _NUXT_URL_ = `http://localhost:${port.main}`
 console.log(`Nuxt on ${_NUXT_URL_}`)
 
 const setupEvents = require('./squirrel')
