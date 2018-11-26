@@ -10,7 +10,7 @@ export default {
   ],
   data() {
     return {
-      ids: null,
+      id: null,
       classes: null,
       contents: null
     }
@@ -36,7 +36,7 @@ export default {
           for ( ; node; node = node.parentNode) {
             if (node !== cover) {
               if (!type) res.push(node)
-              else if (node[type]) res.push(node[type])
+              else if (node[type]) res.unshift(node[type])
             }
           }
           return res
@@ -56,23 +56,26 @@ export default {
         })
         window.addEventListener('click', e => {
           e.preventDefault()
-          console.log('ids:' + parentsInfo(e.target, 'id'))
           console.log('classes:' + parentsInfo(e.target, 'className'))
+          console.log('id:' + e.target.id)
           console.log('contents:' + e.target.textContent)
+          console.log('done')
         })
       `
       webview.addEventListener('console-message', (e) => {
         const msg = e.message
-        const solt = m => m.replace(/^(ids||classes||contents):/, '')
-        if (msg.indexOf('ids:') === 0) this.ids = solt(msg).split(',').filter(e => { return e != '' })
+        const solt = m => m.replace(/^(id||classes||contents):/, '')
+        if (msg.indexOf('id:') === 0) this.id = solt(msg) != '' ? solt(msg) : null
         if (msg.indexOf('classes:') === 0) this.classes = solt(msg).split(',').filter(e => { return e != '' })
         if (msg.indexOf('contents:') === 0) this.contents = solt(msg)
-        const { ids, classes, contents } = this
-        this.$emit('update:selected', {
-          ids,
-          classes,
-          contents
-        })
+        if (msg === 'done') {
+          const { id, classes, contents } = this
+          this.$emit('update:selected', {
+            id,
+            classes,
+            contents
+          })
+        }
       })
       webview.executeJavaScript(script)
       webview.insertCSS(css)
